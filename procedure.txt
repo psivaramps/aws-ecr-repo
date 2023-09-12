@@ -1,0 +1,34 @@
+###########################
+
+https://github.com/ishaqmdgcp/Docker-warapp.git
+
+FROM tomcat:8.0-alpine
+LABEL maintainer="siva"
+ADD ./target/DockerSpring.war /usr/local/tomcat/webapps/
+CMD ["catalina.sh", "run"]
+
+
+docker build -t siva_war:01 .
+
+docker images
+
+docker login
+
+docker run --name "war_app" -p 80:8080 siva_war:01
+
+docker run -d --name wartest1 --mount source=vol3,target=/home  siva_war:01
+docker run -d --name wartest1 --mount source=vol4,target=/home  siva_war:01
+
+docker ps 
+
+docker images
+
+docker exec -it <containerID> /bin/sh
+
+cd home
+
+touch wartext.txt
+echo "This is Ishaq Team" >wartext.txt
+cat wartext.txt
+
+docker volume ls
